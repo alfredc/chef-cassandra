@@ -17,15 +17,16 @@
 #execute "touch /etc/motd"
 #
 
-if node[:java][:install_flavor] ==  "oracle" 
-   execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-6-sun" | sudo -E tee -a ~/.bashrc'
-   execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-6-sun" | sudo -E tee -a ~/.profile'
-end
+# JAVA_HOME should be set through the java cookbook
+#if node[:java][:install_flavor] ==  "oracle" 
+   #execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-6-sun" | sudo -E tee -a ~/.bashrc'
+   #execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-6-sun" | sudo -E tee -a ~/.profile'
+#end
 
-if node[:java][:install_flavor] ==  "openjdk" 
-   execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk" | sudo -E tee -a ~/.bashrc'
-   execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk" | sudo -E tee -a ~/.profile'
-end
+#if node[:java][:install_flavor] ==  "openjdk" 
+   #execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk" | sudo -E tee -a ~/.bashrc'
+   #execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk" | sudo -E tee -a ~/.profile'
+#end
 
 execute 'sudo bash -c "ulimit -n 32768"'
 execute 'echo "* soft nofile 32768" | sudo tee -a /etc/security/limits.conf'
