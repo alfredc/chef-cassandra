@@ -32,7 +32,7 @@ node.default[:internal][:package_user] = "cassandra"
 
 # Installs the latest Cassandra 10x
 #if node[:setup][:deployment] == "10x"
-if node[:setup][:deployment] == "08x" or node[:setup][:deployment] == "07x" or  node[:setup][:deployment] == "10x" or  node[:setup][:deployment] == "11x"
+if node[:setup][:deployment] =~ /\d{2}x/
   case node[:platform]
     when "ubuntu", "debian"
       package "cassandra" do
