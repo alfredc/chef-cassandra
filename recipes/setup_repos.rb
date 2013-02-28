@@ -20,12 +20,12 @@ case node[:platform]
     # Find package codenames
     if node[:platform] == "debian"
       if node[:platform_version] == "6.0"
-        node[:internal][:codename] = "squeeze"
+        node.default[:internal][:codename] = "squeeze"
       elsif node[:platform_version] == "5.0"
-        node[:internal][:codename] = "lenny"
+        node.default[:internal][:codename] = "lenny"
       end
     else
-      node[:internal][:codename] = node['lsb']['codename']
+      node.default[:internal][:codename] = node['lsb']['codename']
     end
 
     # Adds the Cassandra repo:

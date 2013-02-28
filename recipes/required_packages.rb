@@ -19,7 +19,7 @@ case node[:platform]
     # Ensure all native components are up to date
     # execute 'sudo apt-get -y upgrade'
 	  
-    node["java"]["install_flavor"] = "oracle"
+    node.default["java"]["install_flavor"] = "oracle"
     include_recipe "java" 
 
     # Allow for non-interactive Sun Java setup

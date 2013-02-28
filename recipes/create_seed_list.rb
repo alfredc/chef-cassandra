@@ -19,7 +19,7 @@ if not node[:cassandra][:seed]
   # Find the position of the current node in the ring
   cluster_nodes = search(:node, "roles:#{node[:setup][:current_role]}")
   if node[:cassandra][:token_position] == false
-    node[:cassandra][:token_position] = cluster_nodes.count
+    node.default[:cassandra][:token_position] = cluster_nodes.count
   end
 
   # Find all cluster node IP addresses
@@ -55,7 +55,7 @@ Chef::Log.info "[SEEDS] Chosen seed(s): " << seeds.inspect
 
 # TODO: Add support for multiple 07x nodes
 if node[:setup][:deployment] == "07x"
-  node[:cassandra][:seed] = seeds[0]
+  node.default[:cassandra][:seed] = seeds[0]
 else
-  node[:cassandra][:seed] = seeds.join(",")
+  node.default[:cassandra][:seed] = seeds.join(",")
 end

@@ -28,7 +28,7 @@ execute "clear-data" do
 end
 
 # Sets up a user to own the data directories
-node[:internal][:package_user] = "cassandra"
+node.default[:internal][:package_user] = "cassandra"
 
 # Installs the latest Cassandra 10x
 #if node[:setup][:deployment] == "10x"
