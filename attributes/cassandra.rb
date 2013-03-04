@@ -13,6 +13,17 @@
 # limitations under the License.
 
 
+#################################
+# cassandra-topology.properties #
+#################################
+# Example:
+#   default['cassandra']['topology'] = {
+#     '192.168.1.100' => 'DC1:RAC1',
+#     '192.168.2.200' => 'DC2:RAC2'
+#   }
+default['cassandra']['topology'] = {}
+
+
 ####################
 # cassandra-env.sh #
 ####################
