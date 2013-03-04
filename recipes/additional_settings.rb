@@ -13,32 +13,22 @@
 # 
 ###################################################
 
-#execute "rm -rf /etc/motd"
-#execute "touch /etc/motd"
-#
 
-# JAVA_HOME should be set through the java cookbook
-#if node[:java][:install_flavor] ==  "oracle" 
-   #execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-6-sun" | sudo -E tee -a ~/.bashrc'
-   #execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-6-sun" | sudo -E tee -a ~/.profile'
-#end
+# User limits
+template "/etc/security/limits.d/#{node['cassandra']['user']}.conf" do
+  source "cassandra-limits.conf.erb"
+  owner node['cassandra']['user']
+  mode  0644
+end
 
-#if node[:java][:install_flavor] ==  "openjdk" 
-   #execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk" | sudo -E tee -a ~/.bashrc'
-   #execute 'echo "export JAVA_HOME=/usr/lib/jvm/java-1.6.0-openjdk" | sudo -E tee -a ~/.profile'
-#end
+ruby_block "make sure pam_limits.so is required" do
+  block do
+    fe = Chef::Util::FileEdit.new("/etc/pam.d/su")
+    fe.search_file_replace_line(/# session    required   pam_limits.so/, "session    required   pam_limits.so")
+    fe.write_file
+  end
+end
 
-execute 'sudo bash -c "ulimit -n 32768"'
-execute 'echo "* soft nofile 32768" | sudo tee -a /etc/security/limits.conf'
-execute 'echo "* hard nofile 32768" | sudo tee -a /etc/security/limits.conf'
+# Flush file system buffers and free up memory
 execute 'sync'
 execute 'echo 3 > /proc/sys/vm/drop_caches'
-
-# Open ports for communications in Rackspace.
-# This is HORRIBLE security. 
-# Make sure to properly configure your cluster here.
-#if node[:cloud][:provider] == "rackspace" and node[:platform] == "centos"
-#  execute 'sudo service iptables stop' do
-#    ignore_failure true
-#  end
-#end

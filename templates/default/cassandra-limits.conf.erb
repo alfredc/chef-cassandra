@@ -1,0 +1,6 @@
+<%= node.cassandra.user %>     soft    nofile    <%= node.cassandra.limits.nofile %>
+<%= node.cassandra.user %>     hard    nofile    <%= node.cassandra.limits.nofile %>
+<%= node.cassandra.user %>     soft    memlock   <%= node.cassandra.limits.memlock %>
+<%= node.cassandra.user %>     hard    memlock   <%= node.cassandra.limits.memlock %>
+<%= node.cassandra.user %>     soft    as        <%= node.cassandra.limits.as %>
+<%= node.cassandra.user %>     hard    as        <%= node.cassandra.limits.as %>

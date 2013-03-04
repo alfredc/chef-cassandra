@@ -30,10 +30,10 @@ case node[:platform]
 
     # Adds the Cassandra repo:
     # deb http://www.apache.org/dist/cassandra/debian <07x|08x> main
-    if node[:setup][:deployment] =~ /\d{2}x/
+    if node[:cassandra][:setup][:deployment] =~ /\d{2}x/
       apt_repository "cassandra-repo" do
         uri "http://www.apache.org/dist/cassandra/debian"
-        components [node[:setup][:deployment], "main"]
+        components [node[:cassandra][:setup][:deployment], "main"]
         #keyserver "pgp.mit.edu"
         keyserver "keys.gnupg.net"
         key "2B5C1B00"

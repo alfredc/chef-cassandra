@@ -131,8 +131,8 @@ esac
 # times. If in doubt, and if you do not particularly want to tweak, go with
 # 100 MB per physical CPU core.
 
-MAX_HEAP_SIZE="<%= @node['Cassandra']['cassandra_env']['max_heap_size'] %>"
-HEAP_NEWSIZE="<%= @node['Cassandra']['cassandra_env']['heap_newsize'] %>"
+MAX_HEAP_SIZE="<%= node.cassandra.cassandra_env.max_heap_size %>"
+HEAP_NEWSIZE="<%= node.cassandra.cassandra_env.heap_newsize %>"
 
 if [ "x$MAX_HEAP_SIZE" = "x" ] && [ "x$HEAP_NEWSIZE" = "x" ]; then
     calculate_heap_sizes

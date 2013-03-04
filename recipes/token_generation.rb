@@ -22,7 +22,7 @@ if node[:cassandra][:initial_token] == false
   end
 
   # Run tokentool accordingly
-  execute "/tmp/tokentool.py #{node[:setup][:cluster_size]} > /tmp/tokens" do
+  execute "/tmp/tokentool.py #{node[:cassandra][:setup][:cluster_size]} > /tmp/tokens" do
     creates "/tmp/tokens"
   end
 
